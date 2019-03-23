@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { QuestionsComponent } from './views/questions/questions.component';
 import { UserComponent } from './views/user/user.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './views/home/home.component';
 const routes: Routes = [
   { path: 'questions', component: QuestionsComponent },
-  { path: 'user', component: UserComponent }
+  { path: 'user', component: UserComponent },
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
