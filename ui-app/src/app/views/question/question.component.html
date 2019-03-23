@@ -1,0 +1,14 @@
+<div class="row" *ngIf="question">
+  <div class="col-md-12">
+    <h3>{{question.question}}</h3>
+
+    <div class="custom-control custom-radio" *ngFor="let op of question.options;index as i;">
+      <input type="radio" id="{{'radio_'+i}}" name="customRadio" class="custom-control-input">
+      <label class="custom-control-label" for="{{'radio_'+i}}" (click)="selectOption(op.id)">{{op.option}}</label>
+    </div>
+    <hr>
+    <div>
+      <button class="btn btn-primary" (click)="submitVote()" [ngClass]="{disabled:!selectedOptionId}">Submit</button>
+    </div>
+  </div>
+</div>
