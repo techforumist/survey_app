@@ -21,6 +21,6 @@ class Option(models.Model):
 
 class Vote(models.Model):
     question_id = models.IntegerField()
-    optionFie_id = models.IntegerField()
+    option_id = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
