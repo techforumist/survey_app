@@ -5,6 +5,8 @@
         <th width="20px">#</th>
         <th>Qustions</th>
         <th>Vote</th>
+
+        <th>Status</th>
         <th>Options</th>
       </tr>
       <tr *ngFor="let q of questions;index as i">
@@ -14,6 +16,8 @@
         </td>
         <td width="20px"><button class="btn btn-sm btn-info" routerLink="/question/{{q.id}}"> <i
               class="fa fa-arrow-right"></i></button></td>
+        <td width="20px"><button class="btn btn-sm btn-info" routerLink="/vote-status/{{q.id}}"> <i
+              class="fa fa-bar-chart"></i></button></td>
         <td>
           <ul class="list-group list-group-sm">
             <li class="list-group-item list-group-item-sm" *ngFor="let op of q.options; index as i;">{{i+1}}
