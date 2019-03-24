@@ -26,11 +26,16 @@ class OptionViewSet(viewsets.ModelViewSet):
     queryset = models.Option.objects.all()
     serializer_class = OptionSerializer
 
+def get_question_json(id):
+    serializer = QuestionModelSerializer(
+        models.Question.objects.filter(id=id), many=True
+    )
+    return serializer.data[0]
 
 def get_user(request):
     user = request.user
     if user:
-        return JsonResponse({'username': user.username, 'id': user.id})
+        return JsonResponse({"username": user.username, "id": user.id})
     else:
         return JsonResponse({})
 
@@ -72,7 +77,6 @@ def vote_status(request):
 
 
 def post_vote(request):
-    print(request.user)
     if request.method == "POST":
         if request.user.is_authenticated:
             req = json.loads(request.body.decode("utf-8"))
@@ -84,6 +88,29 @@ def post_vote(request):
             vote.user = request.user
             vote.save()
             return HttpResponse(vote)
+        else:
+            return HttpResponse(status=status.HTTP_403_FORBIDDEN)
+
+    return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+def post_question(request):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            req = json.loads(request.body.decode("utf-8"))
+            q = req["question"]
+            ops = req["options"]
+            question = models.Question()
+            question.question = q
+            question.save()
+
+            for opt in ops:
+                option = models.Option()
+                option.option = opt
+                option.question = question
+                option.save()
+
+            return JsonResponse(get_question_json(question.id))
         else:
             return HttpResponse(status=status.HTTP_403_FORBIDDEN)
 

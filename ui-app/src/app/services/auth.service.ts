@@ -37,7 +37,7 @@ export class AuthService {
     this.http.get('/api/user_logout').subscribe(data => {
       if (cb) cb(data);
     }, error => {
-      if (cb) cb(data);
+      if (cb) cb(error);
     })
     this.callLogoutListeners({});
   }

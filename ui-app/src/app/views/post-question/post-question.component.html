@@ -1,3 +1,29 @@
-<p>
-  post-question works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="question">Question:</label>
+      <textarea type="email" class="form-control" id="question" aria-describedby="emailHelp"
+        placeholder="Question" [(ngModel)]="question"></textarea>
+    </div>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+        aria-describedby="basic-addon2" id="option" [(ngModel)]="option">
+      <div class="input-group-append">
+        <button class="btn btn-info" type="button" (click)="addOption()" ><i class="fa fa-plus"></i></button>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="options.length">
+      <label for="question">Options:</label>
+      <table class="table table-sm table-bordered">
+        <tr *ngFor="let op of options;index as i">
+          <td>{{op}}</td>
+          <td width="20px"><button class="btn btn-sm btn-danger" (click)="deleteOption(i)"> <i class="fa fa-trash"></i></button></td>
+        </tr>
+      </table>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+
+  </div>
+</div>

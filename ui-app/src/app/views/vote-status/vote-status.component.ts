@@ -15,24 +15,32 @@ export class VoteStatusComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get("id")
-      console.log(this.id);
+      //console.log(this.id);
       this.http.get('/api/vote-status/?id=' + this.id).subscribe(data => {
         this.data = this.formateData(data);
-        console.log(this.data)
+        //console.log(this.data)
       }, error => {
       });
     })
   }
 
-  formateData(data){
+  formateData(data) {
     let q_options = data.question.options;
     let total = data.total;
     let status = data.status;
-
-    for(let i=0;i<status.length;i++){
+    for (let i = 0; i < q_options.length; i++) {
       q_options[i].total = total
-      q_options[i].vote = status[i].count
-      q_options[i].per = (q_options[i].vote/ q_options[i].total)*100
+      if (status[i]) {
+        q_options[i].vote = status[i].count
+      } else {
+        q_options[i].vote = 0;
+      }
+
+      if (q_options[i].total == 0) {
+        q_options[i].per = 0;
+      } else {
+        q_options[i].per = (q_options[i].vote / q_options[i].total) * 100
+      }
     }
     return data;
   }

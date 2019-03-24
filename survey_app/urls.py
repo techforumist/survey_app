@@ -10,6 +10,7 @@ from polls.views import (
     user_login,
     get_user,
     user_logout,
+    post_question,
 )
 
 router = routers.DefaultRouter()
@@ -25,4 +26,5 @@ urlpatterns = [
     path("api/user_logout/", user_logout),
     path("api/get_user/", get_user),
     path("api/vote-status/", vote_status),
+    path("api/post_question/", post_question),
 ]

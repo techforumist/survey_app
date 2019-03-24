@@ -13,6 +13,7 @@ export class UtilsService {
       "X-CSRFToken": this.getCookie("csrftoken")
     });
   }
+  
   private getCookie(name: string) {
     let ca: Array<string> = document.cookie.split(';');
     let caLen: number = ca.length;

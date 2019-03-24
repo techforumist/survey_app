@@ -1,29 +1,35 @@
 <div class="row">
   <div class="col-md-12">
     <table class="table table-bordered table-sm" *ngIf="questions">
-      <tr>
+      <tr style="font-size:12px;">
         <th width="20px">#</th>
         <th>Qustions</th>
         <th>Vote</th>
 
         <th>Status</th>
-        <th>Options</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <!-- <th>Options</th> -->
       </tr>
       <tr *ngFor="let q of questions;index as i">
         <td width="20px"><a routerLink="/question/{{q.id}}">{{i+1}}</a></td>
         <td>
           <div>{{q.question}}</div>
         </td>
-        <td width="20px"><button class="btn btn-sm btn-info" routerLink="/question/{{q.id}}"> <i
-              class="fa fa-arrow-right"></i></button></td>
-        <td width="20px"><button class="btn btn-sm btn-info" routerLink="/vote-status/{{q.id}}"> <i
+        <td width="20px"><button class="btn btn-sm btn-primary" routerLink="/question/{{q.id}}"> <i
+              class="fa fa-check-square"></i></button></td>
+        <td width="20px"><button class="btn btn-sm btn-primary" routerLink="/vote-status/{{q.id}}"> <i
               class="fa fa-bar-chart"></i></button></td>
-        <td>
+        <td width="20px"><button class="btn btn-sm btn-warning" routerLink="/vote-status/{{q.id}}"> <i
+              class="fa fa-edit"></i></button></td>
+        <td width="20px"><button class="btn btn-sm btn-danger" (click)="deleteQueston(q)"> <i
+              class="fa fa-trash"></i></button></td>
+        <!-- <td>
           <ul class="list-group list-group-sm">
             <li class="list-group-item list-group-item-sm" *ngFor="let op of q.options; index as i;">{{i+1}}
               {{op.option}} </li>
           </ul>
-        </td>
+        </td> -->
       </tr>
     </table>
   </div>
