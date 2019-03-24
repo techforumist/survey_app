@@ -11,7 +11,7 @@ import { QuestionComponent } from './views/question/question.component';
 import { VoteStatusComponent } from './views/vote-status/vote-status.component';
 import { NavComponent } from './layout/nav/nav.component';
 import { LoginComponent } from './views/login/login.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,8 @@ import { LoginComponent } from './views/login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

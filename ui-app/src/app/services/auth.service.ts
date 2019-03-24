@@ -17,7 +17,7 @@ export class AuthService {
   getUser(cb) {
     this.getUserRequest().subscribe(res => {
       this.user = res;
-      console.log(res)
+      //console.log(res)
       if (cb) cb(res);
     }, error => {
       if (cb) cb(error);
@@ -32,9 +32,13 @@ export class AuthService {
   userLogin(cred): Observable<any> {
     return this.http.post('/api/user_login', cred, { headers: this.utils.getHeaders() })
   }
-  logout() {
+  logout(cb) {
     this.user = undefined;
-    this.http.get('/api/user_logout').subscribe()
+    this.http.get('/api/user_logout').subscribe(data => {
+      if (cb) cb(data);
+    }, error => {
+      if (cb) cb(data);
+    })
     this.callLogoutListeners({});
   }
   login(cred, success, error) {
