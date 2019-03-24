@@ -23,4 +23,5 @@ class Vote(models.Model):
     question_id = models.IntegerField()
     option_id = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    updated = models.DateTimeField()
 

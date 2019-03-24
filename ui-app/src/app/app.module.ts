@@ -12,6 +12,9 @@ import { VoteStatusComponent } from './views/vote-status/vote-status.component';
 import { NavComponent } from './layout/nav/nav.component';
 import { LoginComponent } from './views/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,12 +25,14 @@ import { FormsModule } from '@angular/forms';
     QuestionComponent,
     VoteStatusComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

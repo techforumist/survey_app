@@ -11,6 +11,7 @@ from polls.views import (
     get_user,
     user_logout,
     post_question,
+    dash_bord_view,
 )
 
 router = routers.DefaultRouter()
@@ -27,4 +28,5 @@ urlpatterns = [
     path("api/get_user/", get_user),
     path("api/vote-status/", vote_status),
     path("api/post_question/", post_question),
+    path("api/dash_bord_view/", dash_bord_view),
 ]

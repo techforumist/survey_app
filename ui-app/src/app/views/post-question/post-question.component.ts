@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-question',
@@ -12,7 +13,11 @@ export class PostQuestionComponent implements OnInit {
   public options = [];
   public question = '';
   public option = '';
-  constructor(private http: HttpClient, private utils: UtilsService, private router: Router) {
+  closeResult: string;
+  constructor(private http: HttpClient,
+    private utils: UtilsService,
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -26,10 +31,11 @@ export class PostQuestionComponent implements OnInit {
       }, {
         headers: this.utils.getHeaders()
       }).subscribe(res => {
-        console.log('res',res)
+        console.log('res', res)
+        this.toastr.success('Question has been posted');
         this.router.navigate(['questions']);
       }, error => {
-        console.log('error',error)
+        console.log('error', error)
       })
 
   }

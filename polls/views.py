@@ -11,6 +11,7 @@ from . import models
 import json
 from django.contrib.auth.models import User
 from rest_framework import status
+from django.utils.timezone import now
 
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Avg, Count, Min, Sum
@@ -26,11 +27,13 @@ class OptionViewSet(viewsets.ModelViewSet):
     queryset = models.Option.objects.all()
     serializer_class = OptionSerializer
 
+
 def get_question_json(id):
     serializer = QuestionModelSerializer(
         models.Question.objects.filter(id=id), many=True
     )
     return serializer.data[0]
+
 
 def get_user(request):
     user = request.user
@@ -86,6 +89,7 @@ def post_vote(request):
             vote.question_id = question_id
             vote.option_id = option_id
             vote.user = request.user
+            vote.updated = now()
             vote.save()
             return HttpResponse(vote)
         else:
@@ -115,4 +119,19 @@ def post_question(request):
             return HttpResponse(status=status.HTTP_403_FORBIDDEN)
 
     return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+def dash_bord_view(request):
+    question_count = models.Question.objects.count()
+    option_count = models.Option.objects.count()
+    user_count = User.objects.count()
+    vote_count = models.Vote.objects.count()
+    return JsonResponse(
+        {
+            "questions": question_count,
+            "options": option_count,
+            "users": user_count,
+            "votes":vote_count
+        }
+    )
 

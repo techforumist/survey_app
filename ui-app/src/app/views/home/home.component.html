@@ -1,16 +1,15 @@
-<div class="card-deck mb-3 text-center">
+<div class="card-deck mb-3 text-center" *ngIf="dashBoard">
   <div class="card mb-4 box-shadow">
     <div class="card-header">
       <h4 class="my-0 font-weight-normal">Questions</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title pricing-card-title">100 <small class="text-muted">Questions</small></h1>
+      <h1 class="card-title pricing-card-title">{{dashBoard.questions}} <small class="text-muted">Questions</small></h1>
       <ul class="list-unstyled mt-3 mb-4">
-        <li>10 per user</li>
-        <li>Total 100</li>
-        <li>Active 50</li>
+
       </ul>
-      <button type="button" class="btn btn-lg btn-block btn-outline-primary">See Questions</button>
+      <button type="button" class="btn btn-lg btn-block btn-primary">Questions <i
+          class="fa fa-chevron-right"></i></button>
     </div>
   </div>
   <div class="card mb-4 box-shadow">
@@ -18,13 +17,12 @@
       <h4 class="my-0 font-weight-normal">Users</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title pricing-card-title">100 <small class="text-muted">Users</small></h1>
+      <h1 class="card-title pricing-card-title">{{dashBoard.users}} <small class="text-muted">Users</small></h1>
       <ul class="list-unstyled mt-3 mb-4">
-        <li>10 per user</li>
-        <li>Total 100</li>
-        <li>Active 50</li>
+
       </ul>
-      <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+      <button type="button" class="btn btn-lg btn-block btn-primary">Questions <i
+          class="fa fa-chevron-right"></i></button>
     </div>
   </div>
   <div class="card mb-4 box-shadow">
@@ -32,13 +30,25 @@
       <h4 class="my-0 font-weight-normal">Options</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title pricing-card-title">1000 <small class="text-muted">Choices</small></h1>
+      <h1 class="card-title pricing-card-title">{{dashBoard.options}} <small class="text-muted">Choices</small></h1>
       <ul class="list-unstyled mt-3 mb-4">
-        <li>10 per user</li>
-        <li>Total 100</li>
-        <li>Active 50</li>
+
       </ul>
-      <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+      <button type="button" class="btn btn-lg btn-block btn-primary">Questions <i
+          class="fa fa-chevron-right"></i></button>
     </div>
   </div>
+  <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Votes</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{dashBoard.votes}} <small class="text-muted">Votes</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+  
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-primary">Questions <i
+            class="fa fa-chevron-right"></i></button>
+      </div>
+    </div>
 </div>
