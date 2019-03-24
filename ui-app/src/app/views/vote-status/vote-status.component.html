@@ -1,3 +1,13 @@
-<p>
-  vote-status works!
-</p>
+<div class="row" *ngIf="data">
+  <div class="col-md-12">
+
+    <h3>{{data.question.question}}</h3>
+
+
+    <ul class="list-group list-group-sm">
+      <li class="list-group-item list-group-item-sm" *ngFor="let op of data.question.options; index as i;">
+        {{op.option}} </li>
+    </ul>
+
+  </div>
+</div>

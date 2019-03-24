@@ -1,13 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
-from .serializer import QuestionSerializer, OptionSerializer
+from .serializer import (
+    QuestionSerializer,
+    OptionSerializer,
+    OptionModelSerializer,
+    QuestionModelSerializer,
+)
 from . import models
 import json
 from django.contrib.auth.models import User
 from rest_framework import status
 
 from django.contrib.auth import authenticate, login
+from django.db.models import Avg, Count, Min, Sum
+from django.core import serializers
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -43,9 +50,20 @@ def user_login(request):
 
 def vote_status(request):
     id = request.GET.get("id")
-    votes = models.Vote.objects.filter(question_id=id)
-    print(votes)
-    return JsonResponse({"data": list(votes.values())})
+    votes = (
+        models.Vote.objects.filter(question_id=id)
+        .values("option_id")
+        .annotate(count=Count("option_id"))
+    )
+    total_count = models.Vote.objects.filter(question_id=id).count()
+
+    serializer = QuestionModelSerializer(
+        models.Question.objects.filter(id=id), many=True
+    )
+    
+    return JsonResponse(
+        {"status": list(votes), "total": total_count, "question": serializer.data[0]}
+    )
 
 
 def post_vote(request):
