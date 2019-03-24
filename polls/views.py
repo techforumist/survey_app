@@ -12,7 +12,7 @@ import json
 from django.contrib.auth.models import User
 from rest_framework import status
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Avg, Count, Min, Sum
 from django.core import serializers
 
@@ -30,9 +30,14 @@ class OptionViewSet(viewsets.ModelViewSet):
 def get_user(request):
     user = request.user
     if user:
-        return HttpResponse(user.username)
+        return JsonResponse({'username': user.username, 'id': user.id})
     else:
-        return HttpResponse({})
+        return JsonResponse({})
+
+
+def user_logout(request):
+    logout(request)
+    return JsonResponse({"message": "success"})
 
 
 def user_login(request):
@@ -60,7 +65,7 @@ def vote_status(request):
     serializer = QuestionModelSerializer(
         models.Question.objects.filter(id=id), many=True
     )
-    
+
     return JsonResponse(
         {"status": list(votes), "total": total_count, "question": serializer.data[0]}
     )

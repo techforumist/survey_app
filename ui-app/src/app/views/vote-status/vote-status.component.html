@@ -6,7 +6,13 @@
 
     <ul class="list-group list-group-sm">
       <li class="list-group-item list-group-item-sm" *ngFor="let op of data.question.options; index as i;">
-        {{op.option}} </li>
+        {{op.option}} - ({{op.vote}}/{{op.total}})
+
+        <div class="progress-bar progress-bar-striped active" role="progressbar" 
+          aria-valuemax="100" [ngStyle]="{'width':op.per+'%'}">
+          {{op.per | number:'.1-1'}}%
+        </div>
+      </li>
     </ul>
 
   </div>
