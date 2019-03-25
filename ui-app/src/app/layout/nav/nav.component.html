@@ -19,6 +19,9 @@
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/register" style="cursor:pointer;">Register</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
           <a class="nav-link" (click)="login()" style="cursor:pointer;">Login</a>
         </li>
         <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated">

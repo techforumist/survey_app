@@ -8,6 +8,7 @@ import { PostQuestionComponent } from './views/post-question/post-question.compo
 import { QuestionComponent } from './views/question/question.component';
 import { VoteStatusComponent } from './views/vote-status/vote-status.component';
 import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
 const routes: Routes = [
   { path: 'questions', component: QuestionsComponent },
   { path: 'question/:id', component: QuestionComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'post-question', component: PostQuestionComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent }
 ];
 
