@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
 from .serializer import (
@@ -6,16 +6,23 @@ from .serializer import (
     OptionSerializer,
     OptionModelSerializer,
     QuestionModelSerializer,
+    UserModelSerializer,
 )
 from . import models
 import json
 from django.contrib.auth.models import User
 from rest_framework import status
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Avg, Count, Min, Sum
 from django.core import serializers
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserModelSerializer
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -38,7 +45,7 @@ def get_question_json(id):
 def get_user(request):
     user = request.user
     if user:
-        return JsonResponse({"username": user.username, "id": user.id})
+        return JsonResponse(UserModelSerializer(user).data)
     else:
         return JsonResponse({})
 
@@ -77,6 +84,17 @@ def vote_status(request):
     return JsonResponse(
         {"status": list(votes), "total": total_count, "question": serializer.data[0]}
     )
+
+
+def index_view(request):
+    path = request.path[1:]
+    if len(path) == 0:
+        path = "index.html"
+        return render(request, path)
+    else:
+        content_type = "application/x-javascript"
+        path = "/static/"+path
+        return redirect(path)
 
 
 def post_vote(request):
@@ -131,7 +149,7 @@ def dash_bord_view(request):
             "questions": question_count,
             "options": option_count,
             "users": user_count,
-            "votes":vote_count
+            "votes": vote_count,
         }
     )
 

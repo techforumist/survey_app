@@ -1,5 +1,6 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 from . import models
+from django.contrib.auth.models import User
 
 
 class OptionSerializer(HyperlinkedModelSerializer):
@@ -27,3 +28,8 @@ class QuestionModelSerializer(ModelSerializer):
     class Meta:
         model = models.Question
         fields = ("id", "question", "options")
+
+class UserModelSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id","username","first_name","last_name","email","is_active","is_staff","is_superuser")

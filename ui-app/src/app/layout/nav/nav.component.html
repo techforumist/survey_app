@@ -24,6 +24,9 @@
         <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
           <a class="nav-link" (click)="login()" style="cursor:pointer;">Login</a>
         </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated && user.is_superuser">
+          <a class="nav-link" href="/admin" style="cursor:pointer;">Admin</a>
+        </li>
         <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
           <a class="nav-link" (click)="logout()" style="cursor:pointer;">Logout</a>
         </li>

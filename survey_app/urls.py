@@ -1,10 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+
+from django.views.generic.base import TemplateView
 
 from rest_framework import routers
 from polls.views import (
+    index_view,
     QuestionViewSet,
     OptionViewSet,
+    UserViewSet,
     post_vote,
     vote_status,
     user_login,
@@ -17,6 +22,7 @@ from polls.views import (
 router = routers.DefaultRouter()
 router.register("question", QuestionViewSet)
 router.register("option", OptionViewSet)
+router.register("user", UserViewSet)
 
 
 urlpatterns = [
@@ -29,4 +35,5 @@ urlpatterns = [
     path("api/vote-status/", vote_status),
     path("api/post_question/", post_question),
     path("api/dash_bord_view/", dash_bord_view),
+    url(r"^.*js|.*woff|.*css|.*ico|.*svg|.*ttf|.*map|", index_view, name="index"),
 ]
